@@ -11,7 +11,7 @@ using Model.Configurations;
 namespace Model.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20241112113221_initcreate")]
+    [Migration("20241120083412_initcreate")]
     partial class initcreate
     {
         /// <inheritdoc />
