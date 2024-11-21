@@ -1,0 +1,53 @@
+@page "/delbook"
+@using Domain.Interfaces
+@using Domain.Repository
+@using Microsoft.EntityFrameworkCore
+@using Model.Configurations
+@using Model.Entities
+@inject IRepository<Book> BooksRepository
+@rendermode InteractiveServer
+
+<h3>BooksDel</h3>
+<section>
+    <div class="container container-lg">
+        <div class="row">
+            @foreach (var book in _books)
+            {
+                <div class="row">
+                    <div class="col-8">
+                        <p>
+                            @book.Title
+                            @currentCount
+                        </p>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+                            <i class="bi bi-trash3-fill"></i>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _books = BooksRepository.ReadAll();
+    }
+    List<Book> _books=new();
+
+    
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+
+}
