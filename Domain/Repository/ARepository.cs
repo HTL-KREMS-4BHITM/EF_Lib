@@ -51,9 +51,11 @@ public class ARepository<TEntity>: IRepository<TEntity> where TEntity : class
 
     public List<TEntity> ReadAll() => Table.ToList();
 
-    public void Delete(TEntity t)
+    public void Delete(int id)
     {
-        Table.Remove(t);
+
+        var entity = Table.Find(id);
+        Table.Remove(entity);
         Config.SaveChanges();
     }
 }
