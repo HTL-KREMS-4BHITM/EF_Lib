@@ -1,5 +1,8 @@
+using Domain.Interfaces;
+using Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 using Model.Configurations;
+using Model.Entities;
 using WebGUI.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,10 @@ builder.Services.AddDbContextFactory<LibraryContext>(
         new MySqlServerVersion(new Version(8, 0, 36))
     )
 );
+
+builder.Services.AddTransient<IRepository<Book>, BooksRepository>();
+builder.Services.AddTransient<IRepository<Author>, AuthorRepository>();
+
 
 var app = builder.Build();
 

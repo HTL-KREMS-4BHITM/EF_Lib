@@ -1,0 +1,55 @@
+@page "/delauthor"
+@using Domain.Interfaces
+@using Model.Entities
+@inject IRepository<Author> AuthorRepository
+@rendermode InteractiveServer
+@inject NavigationManager _navigationManager
+
+<h3>Delauthor</h3>
+<section>
+    <div class="container container-lg">
+        <div class="row">
+            @foreach (var author in _authors)
+            {
+                <div class="row">
+                    <div class="col-8">
+                        <p>
+                            @author.FirstName @author.LastName
+                        </p>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary" @onclick="() => Delete(author)">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _authors = AuthorRepository.ReadAll();
+    }
+
+    List<Author> _authors = new();
+
+
+    private void Delete(Author author)
+    {
+        AuthorRepository.Delete(author.Id);
+        NevigateToYourUrl();
+    }
+    
+    void NevigateToYourUrl()
+    {
+        _navigationManager.NavigateTo("/delauthor", true);
+    }
+}
