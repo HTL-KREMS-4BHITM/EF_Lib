@@ -3,6 +3,8 @@
 @using Model.Entities
 @inject IRepository<Author> AuthorRepository
 @rendermode InteractiveServer
+@inject NavigationManager _navigationManager
+
 <h3>Delauthor</h3>
 <section>
     <div class="container container-lg">
@@ -43,7 +45,11 @@
     private void Delete(Author author)
     {
         AuthorRepository.Delete(author.Id);
+        NevigateToYourUrl();
     }
-
-
+    
+    void NevigateToYourUrl()
+    {
+        _navigationManager.NavigateTo("/delauthor", true);
+    }
 }
