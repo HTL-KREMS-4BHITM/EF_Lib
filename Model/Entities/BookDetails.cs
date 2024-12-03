@@ -7,8 +7,13 @@ namespace Model.Entities;
 public class BookDetails
 {
     [Key]
-    [Column("BOOKID", TypeName = "int")]
+    [Column("BOOKDETAIL_ID"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int BookDetailsId { get; set; }
+    
+    [Column("BOOKID"), Required, DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int BookId { get; set; }
+    
+    public Book Book { get; set; }
     
     [Required]
     [Column("TOTALCOPIES", TypeName = "int")]

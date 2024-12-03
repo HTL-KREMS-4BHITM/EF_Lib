@@ -1,5 +1,70 @@
-<h3>AddBook</h3>
+@page "/AddBook"
+@using System.Data.SqlTypes
+@using Domain.Interfaces
+@using Microsoft.EntityFrameworkCore
+@using Model.Entities
+@inject IRepository<Book> bookrepository
+@inject IRepository<Author> authorrepo
+@inject IRepository<BookDetails> bookdetailrepo
+@inject NavigationManager navigationmanager
+
+@rendermode InteractiveServer
+
+
+<PageTitle>
+    Add Book
+</PageTitle>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <EditForm Model="Book" OnValidSubmit="CreateBook">
+
+            <label for="Title" class="form-label">Title</label>
+            <InputText id="Author" @bind-Value="Book.Author" class="form-control" />
+            
+            <label for="Title" class="form-label">Title</label>
+            <InputText id="title" @bind-Value="Book.Title" class="form-control" />
+
+            <label for="ISBN" class="form-label">ISBN</label>
+            <InputText id="isbn" @bind-Value="Book.ISBN" class="form-control" />
+
+            <label for="PublishedDate" class="form-label">Published Date</label>
+            <InputDate id="publishedDate" @bind-Value="Book.PublishedDate" class="form-control" />
+            
+            <label for="AuthorId" class="form-label">Author Id</label>
+            <InputNumber id="publishedDate" @bind-Value="Book.AuthorId" class="form-control" />
+
+            <label for="TotalCopies" class="form-label">TotalCopies</label>
+            <InputNumber id="totalcopies" @bind-Value="BookDetails.TotalCopies" class="form-control" />
+
+            <label for="BorrowedCopies" class="form-label">Borrowed</label>
+            <InputNumber id="borrowedcopies" @bind-Value="BookDetails.BorrowedCopies" class="form-control" />
+
+            <label for="AvailableCopies" class="form-label">Available</label>
+            <InputNumber id="availablecopies" @bind-Value="BookDetails.AvailableCopies" class="form-control" />
+
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </EditForm>
+    </div>
+</div>
+
 
 @code {
+    public Book Book = new Book();
+    public BookDetails BookDetails = new BookDetails();
     
+
+    private void CreateBook()
+    {
+        bookdetailrepo.Create(BookDetails);
+        bookrepository.Create(Book);
+        navigationmanager.NavigateTo("/BookPage");
+    }
+    
+
 }

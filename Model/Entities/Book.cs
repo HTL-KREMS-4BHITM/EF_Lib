@@ -25,9 +25,8 @@ public class Book {
     [Column("ISBN")]
     public string ISBN { get; set; } 
     
-    public BookDetails BookDetails { get; set; }
-    
-    [Required]
+   // public BookDetails BookDetails { get; set; }
+   
     [Column("BOOKDETAILSID")]
     public int BookDetailsId { get; set; }
     

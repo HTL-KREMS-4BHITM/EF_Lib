@@ -30,9 +30,9 @@ public class LibraryContext : DbContext
         builder.Entity<Customer>().ToTable("CUSTOMERS");
         builder.Entity<Librarian>().ToTable("LIBRARIANS");
         
-        builder.Entity<Book>().HasOne(c => c.BookDetails)
+        builder.Entity<BookDetails>().HasOne(c => c.Book)
             .WithOne()
-            .HasForeignKey<Book>(c => c.BookDetailsId);
+            .HasForeignKey<BookDetails>(c => c.BookId);
         
         //bidirektional wegen WithMany(List)
         builder.Entity<Book>().HasOne(c => c.AuthorInit)
@@ -47,7 +47,7 @@ public class LibraryContext : DbContext
             .WithMany()
             .HasForeignKey(c => c.CustomerId);
         
-        builder.Entity<BookLoans>().HasKey(o => new {o.BookId, o.CustomerId, o.LibrarianId, o.LoanDate});
+        builder.Entity<BookLoans>().HasKey(o => new {o.BookId, o.CustomerId});
         
         builder.Entity<BookLoans>().HasOne(c => c.Librarian)
             .WithMany()

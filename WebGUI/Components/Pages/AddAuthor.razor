@@ -1,5 +1,48 @@
-<h3>AddAuthor</h3>
+@page "/AddAuthor"
+@using Domain.Interfaces
+@using Microsoft.EntityFrameworkCore
+@using Model.Entities
+@inject IRepository<Author> repository
+@inject NavigationManager navigationmanager
+
+@rendermode InteractiveServer
+<PageTitle>
+    Add Author
+</PageTitle>
+
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <EditForm FormName="AddAuthor" OnValidSubmit="CreateAuthor" Model="Author">
+                
+                <label for="firstname" class="form-control">FirstName</label>
+                <InputText @bind-Value="@Author.FirstName"></InputText>
+
+                <label for="lastname" class="form-control">LastName</label>
+                <InputText id="lastname" @bind-Value="@Author.LastName" class="form-control"></InputText>
+
+                <label for="biography" class="form-control">Biography</label>
+                <InputText id="biography" @bind-Value="@Author.Biography" class="form-control"></InputText>
+
+                <div class="mb-3">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
+            </EditForm>
+        </div>
+    </div>
+
 
 @code {
-    
+
+    public Author Author = new Author();
+
+    public void CreateAuthor()
+    {
+            repository.Create(Author);
+            navigationmanager.NavigateTo("/AuthorPage");
+    }
+
+
+
 }

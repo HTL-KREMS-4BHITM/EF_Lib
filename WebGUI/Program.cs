@@ -1,6 +1,10 @@
+using Domain.Interfaces;
+using Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 using Model.Configurations;
+using Model.Entities;
 using WebGUI.Components;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,11 @@ builder.Services.AddDbContextFactory<LibraryContext>(
         new MySqlServerVersion(new Version(8, 0, 36))
     )
 );
+
+builder.Services.AddTransient<IRepository<Book>, BooksRepository>();
+builder.Services.AddTransient<IRepository<Author>, AuthorRepository>();
+builder.Services.AddTransient<IRepository<BookDetails>, BookDetailsRepository>();
+builder.Services.AddSyncfusionBlazor();
 
 var app = builder.Build();
 

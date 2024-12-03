@@ -1,6 +1,38 @@
 @page "/AuthorPage"
+
+@using Model.Entities
+@using Domain.Interfaces
+@using Domain.Repository
+@inject IRepository<Author> AuthorRepository
+
 <h3>AuthorPage</h3>
 
-@code {
+<h2>Click on Id to Edit</h2>
+
+<h3><a href="@($"/AddAuthor")">Add Author</a></h3>
+
+<table>
+    @foreach (var author in _authors)
+    {
+        <tr>
+            <td><a href="@($"/AuthorEdit/{author.Id}")">@author.Id</a></td>
+            <td>@author.FirstName</td>
+            <td>@author.LastName</td>
+            <td>@author.Biography</td>
+            <td>@author.Books</td>
+            <td>@author.DateOfBirth</td>
+        </tr>
+    }
     
+</table>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _authors = AuthorRepository.ReadAll();
+    }
+
+    private List<Author> _authors = new List<Author>();
 }

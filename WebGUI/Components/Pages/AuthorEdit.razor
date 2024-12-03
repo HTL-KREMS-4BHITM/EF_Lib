@@ -1,5 +1,61 @@
-<h3>AuthorEdit</h3>
+@page "/AuthorEdit/{id:int}"
+@using Domain.Interfaces
+@using Microsoft.EntityFrameworkCore
+@using Model.Entities
+@inject IRepository<Author> repository
+@inject NavigationManager navigationmanager
+
+@rendermode InteractiveServer
+<PageTitle>
+    Edit Author
+</PageTitle>
+
+@if (Author is not null)
+{
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <EditForm FormName="test" OnValidSubmit="Updateauthor" Model="Author">
+                <h3>Edit Author @id</h3>
+                <label for="firstname" class="form-control">FirstName</label>
+                <InputText id="firstname" @bind-Value="@Author.FirstName" class="form-control"></InputText>
+
+                <label for="lastname" class="form-control">LastName</label>
+                <InputText id="lastname" @bind-Value="@Author.LastName" class="form-control"></InputText>
+
+                <label for="biography" class="form-control">Biography</label>
+                <InputText id="biography" @bind-Value="@Author.Biography" class="form-control"></InputText>
+
+                <div class="mb-3">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            </EditForm>
+
+        </div>
+    </div>
+}
 
 @code {
+    [Parameter]
+    public int id { get; set; }
     
+    public Author Author { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Author ??=  repository.Read(id);
+    }
+
+    private void Updateauthor()
+    {
+        if (Author != null)
+        {
+            repository.Update(Author);
+            navigationmanager.NavigateTo("/AuthorPage");
+        }
+    }
+
+
+
 }

@@ -1,6 +1,33 @@
 @page "/BookPage"
+
+@using Model.Entities
+@using Domain.Interfaces
+@using Domain.Repository
+@inject IRepository<Book> BookRepository
 <h3>BookPage</h3>
 
-@code {
+<h2>Click on Id to Edit</h2>
+<h3><a href="@($"/AddBook")">Add Book</a></h3>
+<table>
+    @foreach (var book in _books)
+    {
+        <tr>
+            <td><a href="@($"/BookEdit/{book.Id}")">@book.Id</a></td>
+            <td>@book.Author</td>
+            <td>@book.Title</td>
+            <td>@book.ISBN</td>
+        </tr>
+    }
     
+</table>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _books = BookRepository.ReadAll();
+    }
+
+    private List<Book> _books = new List<Book>();
 }

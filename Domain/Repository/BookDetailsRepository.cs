@@ -3,9 +3,9 @@ using Model.Entities;
 
 namespace Domain.Repository;
 
-public class BookRepository : ARepository<BookDetails>
+public class BookDetailsRepository : ARepository<BookDetails>
 {
-    protected BookRepository(LibraryContext context) : base(context)
+    public BookDetailsRepository(LibraryContext context) : base(context)
     {
     }
 }

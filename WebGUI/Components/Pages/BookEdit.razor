@@ -1,5 +1,61 @@
-<h3>BookEdit</h3>
+@page "/BookEdit/{id:int}"
+@using Domain.Interfaces
+@using Microsoft.EntityFrameworkCore
+@using Model.Entities
+@inject IRepository<Book> repository
+@inject NavigationManager navigationmanager
+
+@rendermode InteractiveServer
+<PageTitle>
+    Edit Book
+</PageTitle>
+
+@if (Book is not null)
+{
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <EditForm FormName="test" OnValidSubmit="UpdateBook" Model="Book">
+                <h3>Edit Author @id</h3>
+                <label for="Author" class="form-control">Author</label>
+                <InputText id="firstname" @bind-Value="@Book.Author" class="form-control"></InputText>
+
+                <label for="Title" class="form-control">Title</label>
+                <InputText id="lastname" @bind-Value="@Book.Title" class="form-control"></InputText>
+
+                <label for="ISBN" class="form-control">ISBN</label>
+                <InputText id="biography" @bind-Value="@Book.ISBN" class="form-control"></InputText>
+
+                <div class="mb-3">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            </EditForm>
+
+        </div>
+    </div>
+}
 
 @code {
+    [Parameter] //holt sich automatisch id von url echt geil
+    public int id { get; set; }
     
+    public Book? Book { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Book ??=  repository.Read(id);
+    }
+
+    private void UpdateBook()
+    {
+        if (Book != null)
+        {
+            repository.Update(Book);
+            navigationmanager.NavigateTo("/BookPage");
+        }
+    }
+
+
+
 }
