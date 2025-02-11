@@ -11,8 +11,8 @@ using Model.Configurations;
 namespace Model.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20241120083412_initcreate")]
-    partial class initcreate
+    [Migration("20250211111207_INIT")]
+    partial class INIT
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,15 +33,15 @@ namespace Model.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)")
-                        .HasColumnName("AUTHOR");
+                        .HasColumnName("Authors");
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int")
-                        .HasColumnName("AUTHORID");
+                        .HasColumnName("AuthorID");
 
                     b.Property<int>("BookDetailsId")
                         .HasColumnType("int")
-                        .HasColumnName("BOOKDETAILSID");
+                        .HasColumnName("BookDetailsID");
 
                     b.Property<string>("ISBN")
                         .IsRequired()
@@ -58,13 +58,13 @@ namespace Model.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)")
-                        .HasColumnName("PUBLISHEDDATE");
+                        .HasColumnName("PublishedDate");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("varchar(45)")
-                        .HasColumnName("TITLE");
+                        .HasColumnName("Title");
 
                     b.HasKey("Id");
 
@@ -73,7 +73,7 @@ namespace Model.Migrations
                     b.HasIndex("BookDetailsId")
                         .IsUnique();
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator<string>("ItemType").HasValue("Book");
 
@@ -185,7 +185,7 @@ namespace Model.Migrations
                 {
                     b.HasBaseType("Model.Entities.Book");
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator().HasValue("Biography");
                 });
@@ -194,7 +194,7 @@ namespace Model.Migrations
                 {
                     b.HasBaseType("Model.Entities.Book");
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator().HasValue("Fantasy");
                 });
@@ -203,7 +203,7 @@ namespace Model.Migrations
                 {
                     b.HasBaseType("Model.Entities.Book");
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator().HasValue("Mystery");
                 });
@@ -212,7 +212,7 @@ namespace Model.Migrations
                 {
                     b.HasBaseType("Model.Entities.Book");
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator().HasValue("NonFiction");
                 });
@@ -221,7 +221,7 @@ namespace Model.Migrations
                 {
                     b.HasBaseType("Model.Entities.Book");
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator().HasValue("Novel");
                 });
@@ -230,7 +230,7 @@ namespace Model.Migrations
                 {
                     b.HasBaseType("Model.Entities.Book");
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator().HasValue("ScienceFiction");
                 });
@@ -239,7 +239,7 @@ namespace Model.Migrations
                 {
                     b.HasBaseType("Model.Entities.Book");
 
-                    b.ToTable("BOOKS");
+                    b.ToTable("Books");
 
                     b.HasDiscriminator().HasValue("Textbook");
                 });

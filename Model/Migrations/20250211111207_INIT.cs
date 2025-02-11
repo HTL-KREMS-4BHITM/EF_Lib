@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Model.Migrations
 {
     /// <inheritdoc />
-    public partial class initcreate : Migration
+    public partial class INIT : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -111,36 +111,36 @@ namespace Model.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "BOOKS",
+                name: "Books",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TITLE = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false)
+                    Title = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    AUTHOR = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    Authors = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PUBLISHEDDATE = table.Column<DateTime>(type: "datetime(6)", rowVersion: true, nullable: false)
+                    PublishedDate = table.Column<DateTime>(type: "datetime(6)", rowVersion: true, nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     ISBN = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BOOKDETAILSID = table.Column<int>(type: "int", nullable: false),
-                    AUTHORID = table.Column<int>(type: "int", nullable: false),
+                    BookDetailsID = table.Column<int>(type: "int", nullable: false),
+                    AuthorID = table.Column<int>(type: "int", nullable: false),
                     ItemType = table.Column<string>(type: "varchar(21)", maxLength: 21, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BOOKS", x => x.ID);
+                    table.PrimaryKey("PK_Books", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_BOOKS_AUTHORS_AUTHORID",
-                        column: x => x.AUTHORID,
+                        name: "FK_Books_AUTHORS_AuthorID",
+                        column: x => x.AuthorID,
                         principalTable: "AUTHORS",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BOOKS_BOOKDETAILS_BOOKDETAILSID",
-                        column: x => x.BOOKDETAILSID,
+                        name: "FK_Books_BOOKDETAILS_BookDetailsID",
+                        column: x => x.BookDetailsID,
                         principalTable: "BOOKDETAILS",
                         principalColumn: "BOOKID",
                         onDelete: ReferentialAction.Cascade);
@@ -164,9 +164,9 @@ namespace Model.Migrations
                 {
                     table.PrimaryKey("PK_BOOKLOANS", x => new { x.BOOKID, x.CUSTOMERID, x.LIBRARIANID, x.LOANDATE });
                     table.ForeignKey(
-                        name: "FK_BOOKLOANS_BOOKS_BOOKID",
+                        name: "FK_BOOKLOANS_Books_BOOKID",
                         column: x => x.BOOKID,
-                        principalTable: "BOOKS",
+                        principalTable: "Books",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -205,14 +205,14 @@ namespace Model.Migrations
                 column: "RETURNLIBRARIANID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BOOKS_AUTHORID",
-                table: "BOOKS",
-                column: "AUTHORID");
+                name: "IX_Books_AuthorID",
+                table: "Books",
+                column: "AuthorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BOOKS_BOOKDETAILSID",
-                table: "BOOKS",
-                column: "BOOKDETAILSID",
+                name: "IX_Books_BookDetailsID",
+                table: "Books",
+                column: "BookDetailsID",
                 unique: true);
         }
 
@@ -223,7 +223,7 @@ namespace Model.Migrations
                 name: "BOOKLOANS");
 
             migrationBuilder.DropTable(
-                name: "BOOKS");
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "CUSTOMERS");

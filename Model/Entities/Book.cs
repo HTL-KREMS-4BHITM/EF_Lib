@@ -3,22 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Entities;
 
-[Table(("BOOKS"))]
+[Table(("Books"))]
 public class Book { 
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("ID")]
     public int Id { get; set; } 
     
     [Required, StringLength(45)]
-    [Column("TITLE")]
+    [Column("Title")]
     public string Title { get; set; } 
     
     [Required, StringLength(50)]
-    [Column("AUTHOR")]
+    [Column("Authors")]
     public string Author { get; set; }
     
     [Required, Timestamp]
-    [Column("PUBLISHEDDATE")]
+    [Column("PublishedDate")]
     public DateTime PublishedDate { get; set; }
     
     [Required, StringLength(30)]
@@ -28,13 +28,13 @@ public class Book {
     public BookDetails BookDetails { get; set; }
     
     [Required]
-    [Column("BOOKDETAILSID")]
+    [Column("BookDetailsID")]
     public int BookDetailsId { get; set; }
     
     public Author AuthorInit { get; set; }
     
     [Required]
-    [Column("AUTHORID")]
+    [Column("AuthorID")]
     public int AuthorId { get; set; }
 } 
 public class NonFiction : Book { } 
