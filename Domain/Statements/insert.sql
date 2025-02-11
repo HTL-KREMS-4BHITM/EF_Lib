@@ -41,16 +41,18 @@ INSERT INTO AUTHORS (Id, Biography) VALUES (6, 'British author known for the Har
 INSERT INTO AUTHORS (Id, Biography) VALUES (7, 'Author of detective novels, creator of Sherlock Holmes.');
 
 -- BOOKS Daten
-INSERT INTO Books (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (1, 'Das Kapital', 'Karl Marx', '1867-09-14', '978-3-16-148410-0', 'NonFiction', 1, 1);
-INSERT INTO Books (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (2, '1984', 'George Orwell', '1949-06-08', '978-0-452-28423-4', 'Novel', 2, 2);
-INSERT INTO Books (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (3, 'Einführung in die Programmierung', 'John Doe', '2020-01-01', '978-3-16-148410-1', 'Textbook', 3, 3);
-INSERT INTO Books (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (4, 'Die Biografie von Albert Einstein', 'Walter Isaacson', '2007-10-02', '978-1-59420-193-0', 'Biography', 4, 4);
-INSERT INTO Books (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (5, 'Der Marsianer', 'Andy Weir', '2011-02-11', '978-3-446-23559-6', 'ScienceFiction', 5, 5);
-INSERT INTO Books (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (6, 'Harry Potter und der Stein der Weisen', 'J.K. Rowling', '1997-06-26', '978-3-7459-9406-7', 'Fantasy', 6, 6);
-INSERT INTO Books (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (7, 'Der Hund von Baskerville', 'Arthur Conan Doyle', '1902-04-01', '978-3-16-148410-8', 'Mystery', 7, 7);
+INSERT INTO BOOKS (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (1, 'Das Kapital', 'Karl Marx', '1867-09-14', '978-3-16-148410-0', 'NonFiction', 1, 1);
+INSERT INTO BOOKS (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (2, '1984', 'George Orwell', '1949-06-08', '978-0-452-28423-4', 'Novel', 2, 2);
+INSERT INTO BOOKS (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (3, 'Einführung in die Programmierung', 'John Doe', '2020-01-01', '978-3-16-148410-1', 'Textbook', 3, 3);
+INSERT INTO BOOKS (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (4, 'Die Biografie von Albert Einstein', 'Walter Isaacson', '2007-10-02', '978-1-59420-193-0', 'Biography', 4, 4);
+INSERT INTO BOOKS (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (5, 'Der Marsianer', 'Andy Weir', '2011-02-11', '978-3-446-23559-6', 'ScienceFiction', 5, 5);
+INSERT INTO BOOKS (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (6, 'Harry Potter und der Stein der Weisen', 'J.K. Rowling', '1997-06-26', '978-3-7459-9406-7', 'Fantasy', 6, 6);
+INSERT INTO BOOKS (Id, Title, Authors, PublishedDate, ISBN, ItemType, BookDetailsId, AuthorId) VALUES (7, 'Der Hund von Baskerville', 'Arthur Conan Doyle', '1902-04-01', '978-3-16-148410-8', 'Mystery', 7, 7);
 
 -- BOOKLOANS Daten
 INSERT INTO BOOKLOANS (CustomerId, BookId, LoanDate, DueDate, LibrarianId) VALUES (1, 1, '2024-01-10', '2024-02-10', 2);
 INSERT INTO BOOKLOANS (CustomerId, BookId, LoanDate, DueDate, LibrarianId, ReturnDate, ReturnLibrarianId) VALUES (2, 3, '2024-02-01', '2024-02-28', 1, '2024-02-20', 3);
 INSERT INTO BOOKLOANS (CustomerId, BookId, LoanDate, DueDate, LibrarianId) VALUES (3, 2, '2024-02-15', '2024-03-15', 2);
 INSERT INTO BOOKLOANS (CustomerId, BookId, LoanDate, DueDate, LibrarianId, ReturnDate, ReturnLibrarianId) VALUES (1, 4, '2024-03-05', '2024-04-05', 3, '2024-03-25', 1);
+
+alter table BOOKS RENAME BOOKS;
